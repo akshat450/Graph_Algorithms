@@ -1,0 +1,18 @@
+import redis
+
+# Define the connection parameters
+redis_host = 'localhost'  # Change this to your Redis server's host
+redis_port = 6379  # Change this to your Redis server's port
+
+# Create a Redis client
+try:
+    redis_client = redis.StrictRedis(host=redis_host, port=redis_port, decode_responses=True)
+    # Note: decode_responses=True ensures that the data retrieved from Redis is decoded to strings, not bytes.
+
+    # Test the connection by setting and getting a value
+    redis_client.set('test_key', 'Hello, Redis!')
+    value = redis_client.get('test_key')
+    print(f'Retrieved value: {value}')
+
+except redis.ConnectionError as e:
+    print(f"Error connecting to Redis: {e}")
